@@ -18,7 +18,7 @@ const searchResult = () => {
     }
     else{
     // fetch api link
-    const url =`http://openlibrary.org/search.json?q=${searchText}`
+    const url =`https://openlibrary.org/search.json?q=${searchText}`
     fetch(url)
     .then(res => res.json())
     .then(data => displaySearchResult(data))
@@ -52,21 +52,20 @@ const displaySearchResult = booksdata => {
             const div = document.createElement('div');
              div.classList.add('col');
             //  img url
-             const imgUrl ="https://covers.openlibrary.org/b/id/" +book.cover_i
-             console.log(imgUrl);
+             const imgUrl ="https://covers.openlibrary.org/b/id/" +book.cover_i;
              div.innerHTML =`
              <div class="card">
                 <img src="${imgUrl}-M.jpg"imclass="card-img-top" alt="...">
                     <div class="card-body">
                     <h5 class="card-title">${book.title}</h5>
-                    <h5 class="card-title">Author-Nmae: ${book.author_name[0] ? book.author_name[0]: 'N/A' }</h5>
+                    <h5 class="card-title">Author-Name: ${book.author_name[0] ? book.author_name[0]: 'N/A' }</h5>
                     <h5 class="card-title">First-Publish-year: ${book.first_publish_year}</h5>
                  </div>
                </div>
                  `
                     displayResult.appendChild(div);
                 })
-            };
+            }
         };
 
     
