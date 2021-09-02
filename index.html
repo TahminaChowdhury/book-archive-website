@@ -10,31 +10,31 @@
     
 </head>
 <body class="bg-light">
+
     <h1 class="text-info text-center mt-5">Search book by name</h1>
+
     <!-- input field -->
-    <div class="input-group mb-3 w-50 mx-auto mb-5">
+
+    <div class="input-group mb-3 w-50 mx-auto">
         <input id="search-field" type="text" class="form-control" placeholder="Search by book name" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button onclick="searchResult()" class="btn btn-info btn-outline-secondary" type="button" id="button-Search">Search</button>
       </div>
 
       <!-- error div -->
+
       <div id="error-div" class="fs-1 text-center">
 
       </div>
       <!--search result div -->
-      <div class="bg-dark w-50 mx-auto text-white" >
-          <h1 id="book-numbers" class="text-center mb-3"></h1>
+
+      <div class="bg-secondary bg-gradient w-50 mx-auto text-white my-3" >
+          <h2 id="book-numbers" class="text-center mb-3"></h2>
       </div>
       <!--book cards -->
 
       <div id="display-results" class="row row-cols-1 row-cols-md-3 g-4">
          
       </div>
-
-
-
-
-
 
     <script src="app.js"></script>
 </body>

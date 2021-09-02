@@ -48,7 +48,6 @@ const displaySearchResult = booksdata => {
             bookNumbers.innerHTML ='';
             // forEach loop
             books.forEach(book => {
-            console.log(book);
             const div = document.createElement('div');
              div.classList.add('col');
             //  img url
