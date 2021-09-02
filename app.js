@@ -70,7 +70,7 @@ const displaySearchResult = booksdata => {
                      <img class="h-100" src="${imgUrl}-M.jpg"imclass="card-img-top" alt="...">
                     <div class="card-body p-3">
                         <h5 class="card-title">${book.title}</h5>
-                        <h5 class="card-title">Author-Name: ${book.author_name[0] ? book.author_name[0]: 'N/A' }</h5>
+                        <h5 class="card-title">Author-Name: ${book ?.author_name?.[0]}</h5>
                         <h5 class="card-title">First-Publish-year: ${book.first_publish_year}</h5>
                     </div>
                </div>
