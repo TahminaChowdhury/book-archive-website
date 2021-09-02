@@ -1,4 +1,6 @@
 const errorDiv = document.getElementById('error-div');
+const bookNumbers =document.getElementById('book-numbers');
+
 // set event listener
 const searchResult = () => {
     const searchField = document.getElementById('search-field');
@@ -9,8 +11,9 @@ const searchResult = () => {
     searchField.value='';
 
     // error handling
-    if (searchField === '') {
-        errorDiv.innerText='No result found';
+    if (searchText === '') {
+        errorDiv.innerText ='No results found';
+        bookNumbers.innerText ='';
         return;
     }
     else{
@@ -25,29 +28,42 @@ const searchResult = () => {
 // display books result
 
 const displaySearchResult = booksdata => {
-    if (booksdata.messegae === 'Not Found') {
-        errorDiv.innerText='No result found';
-    }
-    else{
-        errorDiv.innerText = "";
+    // console.log(booksdata)
+    
+    // display result
+    const displayResult = document.getElementById('display-results');
+    displayResult.innerHTML ='';
         const books = booksdata.docs;
-        const displayResult = document.getElementById('display-results');
-        displayResult.innerHTML ='';
-        books.forEach(book => {
-         //    console.log(book)
-         const div = document.createElement('div');
-         div.classList.add('col');
-         div.innerHTML =`
-         <div class="card">
-                 <img src="" class="card-img-top" alt="...">
-                  <div class="card-body">
+    
+            if (booksdata.numFound === 0) {
+            errorDiv.innerText ='No results found';
+            bookNumbers.innerHTML ='';
+            return;
+        }
+            else{
+            errorDiv.innerText ='';
+            // total books number
+            const bookNumbers =document.getElementById('book-numbers').innerText =`Books found ${books.length}`;
+            // clean books found
+            bookNumbers.innerHTML ='';
+            // forEach loop
+            books.forEach(book => {
+            console.log(book);
+            const div = document.createElement('div');
+             div.classList.add('col');
+             div.innerHTML =`
+             <div class="card">
+                <img src=""class="card-img-top" alt="...">
+                    <div class="card-body">
                     <h5 class="card-title">${book.title}</h5>
-                    <h5 class="card-title">Author-Nmae:${book.author_name[0]}</h5>
-                    <h5 class="card-title">First-Publish_year${book.first_publish_year}</h5>
+                    <h5 class="card-title">Author-Nmae: ${book.author_name[0]}</h5>
+                    <h5 class="card-title">First-Publish-year: ${book.first_publish_year}</h5>
                  </div>
                </div>
-         `
-         displayResult.appendChild(div);
-        })
-    }
-};
+                 `
+                    displayResult.appendChild(div);
+                })
+            };
+        };
+
+    
