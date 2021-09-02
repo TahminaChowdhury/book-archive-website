@@ -20,6 +20,14 @@
         <button onclick="searchResult()" class="btn btn-info btn-outline-secondary" type="button" id="button-Search">Search</button>
       </div>
 
+      <!-- spinner -->
+
+      <div class="text-center d-flex justify-content-center text-info">
+        <div id="spinner"class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
       <!-- error div -->
 
       <div id="error-div" class="fs-1 text-center">
@@ -27,9 +35,10 @@
       </div>
       <!--search result div -->
 
-      <div class="bg-secondary bg-gradient w-50 mx-auto text-white my-3" >
+      <div class="w-50 mx-auto text-secondary my-3" >
           <h2 id="book-numbers" class="text-center mb-3"></h2>
       </div>
+
       <!--book cards -->
 
       <div id="display-results" class="row row-cols-1 row-cols-md-3 g-4">
