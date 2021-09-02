@@ -16,9 +16,11 @@ const searchResult = () => {
     if (searchText === '') {
         errorDiv.innerText ='No results found';
         bookNumbers.innerText ='';
+        document.getElementById('spinner').style.display ='none';
         return;
     }
     else{
+    errorDiv.innerText ='';
     // fetch api link
     const url =`https://openlibrary.org/search.json?q=${searchText}`
     fetch(url)
@@ -30,21 +32,26 @@ const searchResult = () => {
 // display books result
 
 const displaySearchResult = booksdata => {
-    // console.log(booksdata)
+    console.log(booksdata)
     document.getElementById('spinner').style.display ='none';
     // display result
     const displayResult = document.getElementById('display-results');
     displayResult.innerHTML ='';
-        const books = booksdata.docs;
+        
     
             if (booksdata.numFound === 0) {
             errorDiv.innerText ='No results found';
             bookNumbers.innerHTML ='';
+            document.getElementById('spinner').style.display ='none';
+            
             return;
         }
             else{
             errorDiv.innerText ='';
+            document.getElementById('spinner').style.display ='none';
             // total books number
+            const books = booksdata.docs;
+            console.log(books)
             const bookNumbers =document.getElementById('book-numbers').innerText =`Books found ${books.length}`;
             // clean books found
             bookNumbers.innerHTML ='';
