@@ -1,7 +1,12 @@
-const errorDiv = document.getElementById('error-div');
-const bookNumbers =document.getElementById('book-numbers');
-const spinner =document.getElementById('spinner').style.display ='none';
+// spinner
+document.getElementById('spinner').style.display ='none';
 
+// error msg 
+const displayErrorMsg = () => {
+    document.getElementById('error-div').innerText ='No results found';
+    document.getElementById('book-numbers').innerHTML ='';
+    document.getElementById('spinner').style.display ='none';
+};
 // set event listener
 const searchResult = () => {
     document.getElementById('spinner').style.display ='block';
@@ -11,69 +16,68 @@ const searchResult = () => {
     // clear search field
 
     searchField.value='';
-
+    
     // error handling
     if (searchText === '') {
-        errorDiv.innerText ='No results found';
-        bookNumbers.innerText ='';
-        document.getElementById('spinner').style.display ='none';
+        displayErrorMsg();
         return;
     }
     else{
-    errorDiv.innerText ='';
-    // fetch api link
-    const url =`https://openlibrary.org/search.json?q=${searchText}`
-    fetch(url)
-    .then(res => res.json())
-    .then(data => displaySearchResult(data))
+        document.getElementById('error-div').innerText ='';
+        document.getElementById('book-numbers').innerHTML ='';
+        document.getElementById('display-results').innerHTML ='';
+        // fetch api link
+        const url =`https://openlibrary.org/search.json?q=${searchText}`
+        fetch(url)
+        .then(res => res.json())
+        .then(data => displaySearchResult(data))
     }
 };
 
 // display books result
 
 const displaySearchResult = booksdata => {
-    console.log(booksdata)
+
     document.getElementById('spinner').style.display ='none';
     // display result
     const displayResult = document.getElementById('display-results');
     displayResult.innerHTML ='';
-        
     
-            if (booksdata.numFound === 0) {
-            errorDiv.innerText ='No results found';
-            bookNumbers.innerHTML ='';
-            document.getElementById('spinner').style.display ='none';
-            
-            return;
+        if (booksdata.numFound === 0) {
+        displayErrorMsg();
+         return;
         }
-            else{
-            errorDiv.innerText ='';
+        else{
+            document.getElementById('error-div').innerText ='';
             document.getElementById('spinner').style.display ='none';
+                const books = booksdata.docs;
+
             // total books number
-            const books = booksdata.docs;
-            console.log(books)
-            const bookNumbers =document.getElementById('book-numbers').innerText =`Books found ${books.length}`;
+
+                const bookNumbers =document.getElementById('book-numbers').innerText =`Books found ${books.length}`;
             // clean books found
-            bookNumbers.innerHTML ='';
+                bookNumbers.innerHTML ='';
+
             // forEach loop
             books.forEach(book => {
-            const div = document.createElement('div');
-             div.classList.add('col');
+                const div = document.createElement('div');
+                div.classList.add('col');
+
             //  img url
              const imgUrl ="https://covers.openlibrary.org/b/id/" +book.cover_i;
-             div.innerHTML =`
-             <div class="card h-100">
-                <img class="h-100" src="${imgUrl}-M.jpg"imclass="card-img-top" alt="...">
+                div.innerHTML =`
+                <div class="card h-100">
+                     <img class="h-100" src="${imgUrl}-M.jpg"imclass="card-img-top" alt="...">
                     <div class="card-body p-3">
-                    <h5 class="card-title">${book.title}</h5>
-                    <h5 class="card-title">Author-Name: ${book.author_name[0] ? book.author_name[0]: 'N/A' }</h5>
-                    <h5 class="card-title">First-Publish-year: ${book.first_publish_year}</h5>
-                 </div>
+                        <h5 class="card-title">${book.title}</h5>
+                        <h5 class="card-title">Author-Name: ${book.author_name[0] ? book.author_name[0]: 'N/A' }</h5>
+                        <h5 class="card-title">First-Publish-year: ${book.first_publish_year}</h5>
+                    </div>
                </div>
                  `
                     displayResult.appendChild(div);
                 })
-            }
-        };
+        }
+};
 
     
